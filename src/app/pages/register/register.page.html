@@ -1,13 +1,28 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">register</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar [color]="'none'">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-text>Registro</ion-text>
+  </ion-toolbar>
+  <div class="register h-full">
+    <div class="">
+      <form [formGroup]="registerForm" class="" (submit)="registerNewUser()">
+        <ion-item>
+          <ion-label position="stacked">Username</ion-label>
+          <ion-input formControlName="username"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Contraseña</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+        <ion-button
+          class="bg-blue w-full rounded-md px-3 py-2 font-bold"
+          type="submit"
+        >
+          Registrar
+        </ion-button>
+      </form>
+    </div>
+  </div>
 </ion-content>
