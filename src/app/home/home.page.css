@@ -1,0 +1,7 @@
+#login{
+  background-image: url("../../assets/images/bg-login.png");
+  color: white;
+}
+form{
+  backdrop-filter: blur(2px);
+}

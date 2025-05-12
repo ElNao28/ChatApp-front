@@ -1,20 +1,43 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="h-full px-[0.5rem]" id="login">
+    <section class="flex flex-col h-full items-center justify-center">
+      <div class="w-full">
+        <h1 class="px-5 pt-5 font-bold text-xl">Inicio de sesion</h1>
+        <form class="flex p-5 flex-col gap-5">
+          <div class="bg-none">
+            <ion-label class="font-bold" position="stacked"
+              >Nombre de usuario</ion-label
+            >
+            <ion-input
+              type="text"
+              class="border-b-2 border-gray-400"
+            ></ion-input>
+          </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+          <div>
+            <ion-label class="font-bold" position="stacked"
+              >Contraseña</ion-label
+            >
+            <ion-input
+              type="password"
+              class="border-b-2 border-gray-400"
+            ></ion-input>
+          </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+          <div class="flex flex-col gap-1">
+            <button
+              class="bg-emerald-900 w-full rounded-md px-3 py-2 font-bold"
+              type="submit"
+              expand="block"
+            >
+              Login
+            </button>
+            <button class="bg-black w-full rounded-md px-3 py-2 font-bold">
+              Registrarse
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
   </div>
 </ion-content>
