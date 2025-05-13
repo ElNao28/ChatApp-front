@@ -56,6 +56,13 @@ export class ChatPage implements OnInit {
   public isMyMessage(message: Message): boolean {
     return message.user.id === this.decodeToken().id;
   }
+  public ngClassByMessage(message: Message): string {
+    if (!this.isMyMessage(message)) {
+      return 'bg-gray-700 text-white';
+    } else {
+      return 'bg-white text-black';
+    }
+  }
   public sendMessage(): void {
     if (this.sendMessageForm.invalid) return;
     const data: SendMessage = {
@@ -73,11 +80,11 @@ export class ChatPage implements OnInit {
     });
     return receptor?.user.id!;
   }
-  public getTime(createdAt: string){
-    const date = new Date(createdAt).toLocaleString()
-    const timeSplit = date.split(', ')[1]
+  public getTime(createdAt: string) {
+    const date = new Date(createdAt).toLocaleString();
+    const timeSplit = date.split(', ')[1];
     const times = timeSplit.split(':');
     const schedule = times[2].split(' ')[1];
-    return `${times[0]}:${times[1]} ${schedule}`
+    return `${times[0]}:${times[1]} ${schedule}`;
   }
 }

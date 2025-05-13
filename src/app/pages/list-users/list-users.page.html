@@ -8,9 +8,24 @@
   <div class="list-container h-full flex flex-col gap-1 pt-3">
     <ion-item *ngFor="let contact of users">
       <ion-label>{{ contact.username | titlecase }}</ion-label>
-      <ion-button color="success" [size]="'medium'" routerLink="/chat/new">
+      <ion-button color="success" [size]="'medium'" (click)="openDialog(contact.id)">
         <ion-icon class="text-white" name="paper-plane-outline"></ion-icon>
       </ion-button>
     </ion-item>
   </div>
+  <p-dialog
+    [header]="'Enviar mensaje'"
+    [visible]="visible"
+    [style]="{ width: '80%' }"
+    (visibleChange)="closeDialog()"
+    [draggable]="false"
+    [modal]="true"
+  >
+    <div>
+      <form [formGroup]="sendMessageForm" (submit)="sendMessage()">
+        <ion-input formControlName="message" placeholder="Mensaje" class="border-b-2"></ion-input>
+        <ion-button type="submit" color="success" class="w-full mt-2">Enviar</ion-button>
+      </form>
+    </div>
+  </p-dialog>
 </ion-content>
