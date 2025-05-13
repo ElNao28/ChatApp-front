@@ -12,14 +12,8 @@
       +
     </button>
     <ion-list>
-      <ion-item>
-        <ion-label>Nombre: John Doe</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Correo electrónico: johndoe.com</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Teléfono: 1234567890</ion-label>
+      <ion-item *ngFor="let chat of chats">
+        <ion-label>{{chat.id}}</ion-label>
       </ion-item>
     </ion-list>
   </div>
