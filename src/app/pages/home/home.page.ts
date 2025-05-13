@@ -21,7 +21,6 @@ export class HomePage {
   public titleUser: string = '';
   public chats: Chats[] = [];
   ionViewWillEnter(): void {
-    console.log('ionViewWillEnter');
     this.decodeToken();
   }
   private decodeToken(): void {
