@@ -1,3 +1,9 @@
 .chats{
   background-color: #636469;
 }
+.last-message{
+  font-size: small;
+}
+.time{
+  font-size: x-small;
+}
