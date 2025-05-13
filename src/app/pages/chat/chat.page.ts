@@ -25,7 +25,6 @@ export class ChatPage implements OnInit {
   public sendMessageForm = this.fb.group({
     message: ['', [Validators.required]],
   });
-
   ngOnInit() {
     this.conectToRoom();
   }
@@ -41,6 +40,7 @@ export class ChatPage implements OnInit {
     this.webSocket.getMessagesByChat().subscribe({
       next: (messages) => {
         this.messages = messages;
+        console.log(messages);
       },
       error: (error) => console.error(error),
     });
@@ -86,5 +86,12 @@ export class ChatPage implements OnInit {
     const times = timeSplit.split(':');
     const schedule = times[2].split(' ')[1];
     return `${times[0]}:${times[1]} ${schedule}`;
+  }
+  public getNameChat(): string {
+    const chat = this.messages.find((message) =>
+      message.user.chats.find((chats) => chats.chat.id === this.getRoomId())
+    );
+    return chat?.user.chats.find((chat) => chat.chat.id === this.getRoomId())
+      ?.title!;
   }
 }
