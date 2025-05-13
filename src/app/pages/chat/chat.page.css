@@ -5,3 +5,9 @@ input{
   outline: none;
   color: white;
 }
+.text-chat{
+  min-width: 50vw;
+}
+.time{
+  font-size: 0.6rem;
+}

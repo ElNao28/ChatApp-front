@@ -5,3 +5,9 @@ export interface Message{
   message:string;
   user:User
 }
+export interface SendMessage {
+  from:string;
+  to:string;
+  message:string;
+  chatId?:string;
+}

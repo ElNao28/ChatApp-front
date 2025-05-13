@@ -8,19 +8,28 @@
   <div class="chat-container h-full relative">
     <ul class="px-3 py-3 flex flex-col gap-5">
       <li *ngFor="let message of messages">
-        <div
-          class="flex"
-          [ngClass]="{'justify-end': isMyMessage(message)}"
-        >
-          <span class="bg-green-300 px-2 py-1 rounded-md">{{message.message}}</span>
+        <div class="flex" [ngClass]="{'justify-end': isMyMessage(message)}">
+          <div class="px-2 pt-2 rounded-md bg-gray-700 text-white" [ngClass]="{'bg-white text-black': isMyMessage(message)}">
+            <ul class="text-sm text-chat">
+              <li>{{message.message}}</li>
+              <div class="flex justify-end">
+                <li class="time text-gray-400 ">{{getTime(message.createdAt)}}</li>
+              </div>
+            </ul>
+          </div>
         </div>
       </li>
     </ul>
-    <form class="absolute bottom-5 w-full px-3 flex items-center gap-1">
+    <form
+      [formGroup]="sendMessageForm"
+      class="absolute bottom-5 w-full px-3 flex items-center gap-1 z-10"
+      (submit)="sendMessage()"
+    >
       <input
         type="text"
         placeholder="Escribe tu mensaje"
         class="bg-gray-300 bg-opacity-30 rounded-md px-2 py-3 w-full"
+        formControlName="message"
       />
       <button class="" type="submit" class="flex items-center">
         <ion-icon name="send" class="text-xl" color="success"></ion-icon>

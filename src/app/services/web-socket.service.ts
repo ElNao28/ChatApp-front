@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
 import { Chats, Message } from '../interfaces/chats.interface';
+import { SendMessage } from '../interfaces/messages.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -20,5 +21,8 @@ export class WebSocketService {
   }
   public getMessagesByChat(): Observable<Message[]> {
     return this.socket.fromEvent('messagesRoom');
+  }
+  public sendMessage(data: SendMessage): void {
+    this.socket.emit('createMessage', data);
   }
 }

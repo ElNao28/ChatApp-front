@@ -16,4 +16,5 @@ export interface Message {
   id: string;
   message: string;
   user:User
+  createdAt: string;
 }
