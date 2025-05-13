@@ -1,11 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Username</ion-title>
+    <ion-title>{{titleUser}}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
   <div class="relative h-full">
-    <button class="bg-green-600 text-2xl text-white font-bold rounded-full px-5 py-3 absolute bottom-5 right-5 shadow-xl">+</button>
+    <button
+      class="bg-green-600 text-2xl text-white font-bold rounded-full px-5 py-3 absolute bottom-5 right-5 shadow-xl"
+    >
+      +
+    </button>
     <ion-list>
       <ion-item>
         <ion-label>Nombre: John Doe</ion-label>
