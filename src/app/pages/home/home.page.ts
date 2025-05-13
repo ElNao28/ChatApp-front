@@ -11,7 +11,9 @@ import { WebSocketService } from 'src/app/services/web-socket.service';
   standalone: false,
 })
 export class HomePage implements OnInit {
-  constructor(private webSocket: WebSocketService) {}
+  constructor(
+    private webSocket: WebSocketService,
+  ) {}
   private jwtService = new JwtHelperService();
   private token: string = '';
   public titleUser: string = '';
@@ -29,7 +31,6 @@ export class HomePage implements OnInit {
     this.webSocket.createRoom(idUser);
     this.webSocket.getChats().subscribe({
       next: (chats) => {
-        console.log(chats);
         this.chats = chats;
       },
       error: (error) => {

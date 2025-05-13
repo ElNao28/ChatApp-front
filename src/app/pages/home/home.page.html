@@ -13,7 +13,12 @@
     </button>
     <ion-list class="chats">
       <ion-searchbar [placeholder]="'Buscar contacto'"></ion-searchbar>
-      <ion-item *ngFor="let chat of chats" color="'medium'" class="mt-3">
+      <ion-item
+        *ngFor="let chat of chats"
+        color="'medium'"
+        class="mt-3"
+        [routerLink]="'/chat/'+chat.chat.id"
+      >
         <ul>
           <li class="font-bold">{{chat.title | titlecase}}</li>
           <li class="text-sm text-green-300">
@@ -24,4 +29,3 @@
     </ion-list>
   </div>
 </ion-content>
-
