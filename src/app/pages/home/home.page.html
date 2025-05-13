@@ -3,4 +3,19 @@
     <ion-title>Username</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content></ion-content>
+<ion-content [fullscreen]="true">
+  <div class="relative h-full">
+    <button class="bg-green-600 text-2xl text-white font-bold rounded-full px-5 py-3 absolute bottom-5 right-5 shadow-xl">+</button>
+    <ion-list>
+      <ion-item>
+        <ion-label>Nombre: John Doe</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Correo electrónico: johndoe.com</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Teléfono: 1234567890</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
