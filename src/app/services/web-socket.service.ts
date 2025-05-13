@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
-import { Chats } from '../interfaces/chats.interface';
+import { Chats, Message } from '../interfaces/chats.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -14,5 +14,11 @@ export class WebSocketService {
   }
   public getChats(): Observable<Chats[]> {
     return this.socket.fromEvent('chatsRoom');
+  }
+  public connectRoom(chatId: string): void {
+    this.socket.emit('connectRoom', { chatId });
+  }
+  public getMessagesByChat(): Observable<Message[]> {
+    return this.socket.fromEvent('messagesRoom');
   }
 }
