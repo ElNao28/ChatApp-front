@@ -13,3 +13,10 @@ input{
 .time{
   font-size: 0.6rem;
 }
+.chats{
+  height: 85vh;
+}
+form{
+  background-color: #636469;
+  height: 10vh;
+}

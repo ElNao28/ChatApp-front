@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <div class="chat-container h-full">
-    <ul class="px-3 py-3 flex flex-col gap-5">
+  <div class="h-full">
+    <ul class="chat-container px-3 py-3 flex flex-col gap-5 chats">
       <li *ngFor="let message of messages">
         <div class="flex" [ngClass]="{'justify-end': isMyMessage(message)}">
           <div class="px-2 pt-2 rounded-md {{ngClassByMessage(message)}}">
@@ -27,18 +27,20 @@
     </ul>
     <form
       [formGroup]="sendMessageForm"
-      class="absolute bottom-5 w-full px-3 flex items-center gap-1 z-10 mt-5"
+      class="fixed bottom-0 w-full px-3 flex items-end pb-5 gap-1 z-10"
       (submit)="sendMessage()"
     >
-      <input
-        type="text"
-        placeholder="Mensaje"
-        class="bg-gray-300 bg-opacity-30 rounded-md px-2 py-3 w-full"
-        formControlName="message"
-      />
-      <button class="" type="submit" class="flex items-center">
-        <ion-icon name="send" class="text-xl" color="success"></ion-icon>
-      </button>
+      <div class="flex items-center w-full gap-1">
+        <input
+          type="text"
+          placeholder="Mensaje"
+          class="bg-gray-300 bg-opacity-30 rounded-md px-2 py-3 w-full"
+          formControlName="message"
+        />
+        <button class="" type="submit" class="flex items-center">
+          <ion-icon name="send" class="text-xl" color="success"></ion-icon>
+        </button>
+      </div>
     </form>
   </div>
 </ion-content>
