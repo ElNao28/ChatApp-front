@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -19,7 +19,7 @@ export class ChatPage implements OnInit {
     private webSocket: WebSocketService,
     private fb: FormBuilder
   ) {}
-
+  public titleChat: string = '';
   private jwtHelper = new JwtHelperService();
   public messages: Message[] = [];
   public sendMessageForm = this.fb.group({
@@ -40,7 +40,7 @@ export class ChatPage implements OnInit {
     this.webSocket.getMessagesByChat().subscribe({
       next: (messages) => {
         this.messages = messages;
-        console.log(messages);
+        this.titleChat = this.getNameChat()
       },
       error: (error) => console.error(error),
     });
@@ -88,10 +88,10 @@ export class ChatPage implements OnInit {
     return `${times[0]}:${times[1]} ${schedule}`;
   }
   public getNameChat(): string {
-    const chat = this.messages.find((message) =>
-      message.user.chats.find((chats) => chats.chat.id === this.getRoomId())
+    const chat = this.messages.filter(
+      (message) => message.user.id !== this.decodeToken().id
     );
-    return chat?.user.chats.find((chat) => chat.chat.id === this.getRoomId())
-      ?.title!;
+    if (chat.length > 0) return chat[0].user.username;
+    return 'Chat';
   }
 }
