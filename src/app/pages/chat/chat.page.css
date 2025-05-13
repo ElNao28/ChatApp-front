@@ -1,5 +1,7 @@
 .chat-container {
   background-color: #636469;
+  position: relative;
+  overflow-y: auto;
 }
 input{
   outline: none;

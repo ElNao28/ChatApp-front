@@ -4,8 +4,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div class="chat-container h-full relative">
+<ion-content>
+  <div class="chat-container h-full">
     <ul class="px-3 py-3 flex flex-col gap-5">
       <li *ngFor="let message of messages">
         <div class="flex" [ngClass]="{'justify-end': isMyMessage(message)}">
@@ -22,7 +22,7 @@
     </ul>
     <form
       [formGroup]="sendMessageForm"
-      class="absolute bottom-5 w-full px-3 flex items-center gap-1 z-10"
+      class="sticky bottom-5 w-full px-3 flex items-center gap-1 z-10 mt-5"
       (submit)="sendMessage()"
     >
       <input
