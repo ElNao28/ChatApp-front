@@ -1,9 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CreateUserResponse, NewUser } from '../interfaces/user.interface';
+import {
+  CreateUserResponse,
+  LoginUser,
+  NewUser,
+} from '../interfaces/user.interface';
 import { environment } from 'src/environments/environment.prod';
 import { HandlerResponse } from '../utils/Handler-response.util';
 import { Observable } from 'rxjs';
+import { ResponseLogin } from '../interfaces/login.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -20,5 +25,8 @@ export class AuthService {
       `${this.apiUrl}user/create`,
       newUser
     );
+  }
+  public loginUse(loginUser: LoginUser): Observable<ResponseLogin> {
+    return this.http.post<ResponseLogin>(`${this.apiUrl}auth/login`, loginUser);
   }
 }

@@ -7,3 +7,4 @@ export interface CreateUserResponse {
   username: string;
   password: string;
 }
+export interface LoginUser extends NewUser {}
