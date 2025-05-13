@@ -11,19 +11,17 @@ import { WebSocketService } from 'src/app/services/web-socket.service';
   styleUrls: ['home.page.css'],
   standalone: false,
 })
-export class HomePage implements OnInit,OnDestroy {
+export class HomePage {
   constructor(
     private webSocket: WebSocketService,
     private router: Router,
   ) {}
-  ngOnDestroy(): void {
-    this.webSocket.closeSesion();
-  }
   private jwtService = new JwtHelperService();
   private token: string = '';
   public titleUser: string = '';
   public chats: Chats[] = [];
-  ngOnInit(): void {
+  ionViewWillEnter(): void {
+    console.log('ionViewWillEnter');
     this.decodeToken();
   }
   private decodeToken(): void {
@@ -37,6 +35,7 @@ export class HomePage implements OnInit,OnDestroy {
     this.webSocket.getChats().subscribe({
       next: (chats) => {
         this.chats = chats;
+        console.log(this.chats);
       },
       error: (error) => {
         console.error(error);
