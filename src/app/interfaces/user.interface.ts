@@ -8,4 +8,6 @@ export interface CreateUserResponse {
   password: string;
 }
 export interface LoginUser extends NewUser {}
-export interface User extends NewUser {}
+export interface User extends NewUser {
+  id:string;
+}

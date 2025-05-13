@@ -12,15 +12,26 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/home/home.module').then((m) => m.HomePageModule),
   },
+
+  {
+    path: 'register',
+    loadChildren: () =>
+      import('./pages/register/register.module').then(
+        (m) => m.RegisterPageModule
+      ),
+  },
+  {
+    path: 'list-users',
+    loadChildren: () =>
+      import('./pages/list-users/list-users.module').then(
+        (m) => m.ListUsersPageModule
+      ),
+  },
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full',
-  },  {
-    path: 'register',
-    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
-
 ];
 
 @NgModule({
