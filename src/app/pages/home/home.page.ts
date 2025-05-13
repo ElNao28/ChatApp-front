@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Chats } from 'src/app/interfaces/chats.interface';
@@ -11,11 +11,14 @@ import { WebSocketService } from 'src/app/services/web-socket.service';
   styleUrls: ['home.page.css'],
   standalone: false,
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit,OnDestroy {
   constructor(
     private webSocket: WebSocketService,
     private router: Router,
   ) {}
+  ngOnDestroy(): void {
+    this.webSocket.closeSesion();
+  }
   private jwtService = new JwtHelperService();
   private token: string = '';
   public titleUser: string = '';

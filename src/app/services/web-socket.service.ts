@@ -25,4 +25,7 @@ export class WebSocketService {
   public sendMessage(data: SendMessage): void {
     this.socket.emit('createMessage', data);
   }
+  public closeSesion():void{
+    this.socket.disconnect();
+  }
 }

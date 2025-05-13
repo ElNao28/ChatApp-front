@@ -11,7 +11,7 @@
   <div class="list-container h-full flex flex-col gap-1 pt-3">
     <ion-item *ngFor="let contact of users">
       <ion-label>{{ contact.username | titlecase }}</ion-label>
-      <ion-button color="success" [size]="'medium'" (click)="openDialog(contact.id)">
+      <ion-button color="success" [size]="'medium'" (click)="openDialog(contact)">
         <ion-icon class="text-white" name="paper-plane-outline"></ion-icon>
       </ion-button>
     </ion-item>

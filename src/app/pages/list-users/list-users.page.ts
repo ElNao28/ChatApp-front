@@ -37,9 +37,9 @@ export class ListUsersPage implements OnInit {
     const decodedToken: User = this.jwtHelper.decodeToken(token!)!;
     return decodedToken;
   }
-  public openDialog(userId: string): void {
+  public openDialog(user: User): void {
     this.visible = true;
-    this.sendMessageForm.patchValue({ to: userId });
+    this.sendMessageForm.patchValue({ to: user.id });
   }
   public closeDialog():void{
     this.visible = false;
