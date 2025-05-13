@@ -1,24 +1,28 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { loginGuard } from './guards/login.guard';
+import { foundTokenGuard } from './guards/found-token.guard';
 
 const routes: Routes = [
-  {
-    path: 'login',
-    loadChildren: () =>
-      import('./pages/login/login.module').then((m) => m.LoginPageModule),
-  },
   {
     path: 'home',
     loadChildren: () =>
       import('./pages/home/home.module').then((m) => m.HomePageModule),
+    canActivate: [foundTokenGuard],
   },
-
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./pages/login/login.module').then((m) => m.LoginPageModule),
+    canActivate: [loginGuard],
+  },
   {
     path: 'register',
     loadChildren: () =>
       import('./pages/register/register.module').then(
         (m) => m.RegisterPageModule
       ),
+    canActivate: [loginGuard],
   },
   {
     path: 'list-users',
@@ -26,15 +30,21 @@ const routes: Routes = [
       import('./pages/list-users/list-users.module').then(
         (m) => m.ListUsersPageModule
       ),
+    canActivate: [foundTokenGuard],
   },
-
   {
     path: 'chat/:id',
     loadChildren: () =>
       import('./pages/chat/chat.module').then((m) => m.ChatPageModule),
+    canActivate: [foundTokenGuard],
   },
   {
     path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
+  {
+    path: '**',
     redirectTo: 'login',
     pathMatch: 'full',
   },
@@ -42,7 +52,10 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules,useHash: true }),
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules,
+      useHash: true,
+    }),
   ],
   exports: [RouterModule],
 })
