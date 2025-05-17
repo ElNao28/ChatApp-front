@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar [color]="'dark'">
+    <ion-title>Lista de contactos</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <div *ngFor="let contact of users" routerLink="/chat/{{contact.id}}">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>{{ contact.username }}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+    <ion-item-divider></ion-item-divider>
+  </div>
+</ion-content>

@@ -31,6 +31,13 @@ const routes: Routes = [
     canActivate: [foundTokenGuard],
   },
   {
+    path: 'list-contacts',
+    loadChildren: () =>
+      import('./pages/list-contacts/list-contacts.module').then(
+        (m) => m.ListContactsPageModule
+      ),
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',

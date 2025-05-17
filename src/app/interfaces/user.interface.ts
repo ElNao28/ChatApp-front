@@ -1,8 +1,9 @@
+export interface LoginUser extends NewUser {}
+
 export interface NewUser {
   username: string;
   password: string;
 }
-export interface LoginUser extends NewUser {}
 
 export interface CreateUserResponse {
   id: string;
@@ -12,4 +13,9 @@ export interface CreateUserResponse {
 
 export interface UserDecoded extends NewUser {
   id: string;
+}
+
+export interface User extends CreateUserResponse {
+  lastConnection: string;
+  status: 'online' | 'offline';
 }
