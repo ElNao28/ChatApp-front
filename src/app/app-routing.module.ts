@@ -25,14 +25,6 @@ const routes: Routes = [
     canActivate: [loginGuard],
   },
   {
-    path: 'list-users',
-    loadChildren: () =>
-      import('./pages/list-users/list-users.module').then(
-        (m) => m.ListUsersPageModule
-      ),
-    canActivate: [foundTokenGuard],
-  },
-  {
     path: 'chat/:id',
     loadChildren: () =>
       import('./pages/chat/chat.module').then((m) => m.ChatPageModule),

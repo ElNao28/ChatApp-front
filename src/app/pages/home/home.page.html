@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar [color]="'dark'">
-    <ion-title>{{titleUser | titlecase }}</ion-title>
+    <ion-title>Chat App</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="signOut()">
         <ion-icon name="log-out-outline"></ion-icon>
@@ -19,22 +19,16 @@
     <ion-list class="chats">
       <ion-searchbar [placeholder]="'Buscar contacto'"></ion-searchbar>
       <ion-item
-        *ngFor="let chat of chats"
+        *ngFor="let chat of listChat"
         color="'medium'"
         class="mt-3"
-        [routerLink]="'/chat/'+chat.chat.id"
+        [routerLink]="'/chat/'+ chat.id"
       >
         <ul class="w-full">
-          <li class="font-bold">{{chat.title | titlecase}}</li>
-          <li class="text-green-300 flex justify-between w-full">
-            <span class="last-message"
-              >{{chat.chat.messages[chat.chat.messages.length -
-              1].message}}</span
-            >
-            <span class="time"
-              >{{getTime(chat.chat.messages[chat.chat.messages.length
-              -1].createdAt)}}</span
-            >
+          <li class="font-bold">{{chat.chat.user.username| titlecase}}</li>
+          <li class="text-green-300 flex justify-between gap-5 w-full">
+            <span class="last-message">{{chat.lastMessage.message}}</span>
+            <span class="time">{{getTime(chat.lastMessage.createdAt)}}</span>
           </li>
         </ul>
       </ion-item>

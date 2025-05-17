@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
-import { Chats, Message } from '../interfaces/chats.interface';
 import { SendMessage } from '../interfaces/messages.interface';
+import { Home } from '../interfaces/Home.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -10,22 +10,15 @@ import { SendMessage } from '../interfaces/messages.interface';
 export class WebSocketService {
   constructor(private socket: Socket) {}
 
-  public createRoom(idUser: string) {
-    this.socket.emit('createRoom', { idUser });
+  public connectWebSocket(userId: string): void {
+    this.socket.emit('enterApp', { userId });
   }
-  public getChats(): Observable<Chats[]> {
-    return this.socket.fromEvent('chatsRoom');
+
+  public getListChats(): Observable<Home[]> {
+    return this.socket.fromEvent('listChats');
   }
-  public connectRoom(chatId: string): void {
-    this.socket.emit('connectRoom', { chatId });
-  }
-  public getMessagesByChat(): Observable<Message[]> {
-    return this.socket.fromEvent('messagesRoom');
-  }
-  public sendMessage(data: SendMessage): void {
-    this.socket.emit('createMessage', data);
-  }
-  public closeSesion():void{
+
+  public closeSesion(): void {
     this.socket.disconnect();
   }
 }
