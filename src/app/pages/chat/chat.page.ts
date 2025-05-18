@@ -95,6 +95,7 @@ export class ChatPage {
     this.webSocket.getMessageByChatId().subscribe({
       next: (message: Message) => {
         this.messages.push(message);
+        console.log('Evento nuevo mensaje')
       },
       error: (err) => console.error(err),
     });
