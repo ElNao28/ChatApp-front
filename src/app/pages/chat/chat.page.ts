@@ -76,6 +76,30 @@ export class ChatPage {
   private jointRoomByChat(idChat: string): void {
     this.webSocket.joinRoomByChatId(idChat);
   }
+
+  public sendMessage(): void {
+    const dataSend: SendMessage = {
+      from: this.authService.decodeToken().id,
+      to: this.activateRouter.snapshot.paramMap.get('id')!,
+      message: this.sendMessageForm.controls['message'].value,
+      chatId: this.idChat,
+    };
+    this.webSocket.sendMessage(dataSend);
+    if (!this.foundChat) {
+      this.getChats();
+    }
+    this.sendMessageForm.reset();
+  }
+
+  private getMessage(): void {
+    this.webSocket.getMessageByChatId().subscribe({
+      next: (message: Message) => {
+        this.messages.push(message);
+      },
+      error: (err) => console.error(err),
+    });
+  }
+
   public getTime(createdAt: string): string {
     return this.genericsService.getTime(createdAt);
   }
@@ -88,25 +112,5 @@ export class ChatPage {
     } else {
       return 'bg-white text-black';
     }
-  }
-
-  public sendMessage(): void {
-    const dataSend: SendMessage = {
-      from: this.authService.decodeToken().id,
-      to: this.activateRouter.snapshot.paramMap.get('id')!,
-      message: this.sendMessageForm.controls['message'].value,
-      chatId: this.idChat,
-    };
-    this.webSocket.sendMessage(dataSend);
-    this.sendMessageForm.reset();
-  }
-
-  private getMessage(): void {
-    this.webSocket.getMessageByChatId().subscribe({
-      next: (message: Message) => {
-        this.messages.push(message);
-      },
-      error: (err) => console.error(err),
-    });
   }
 }
