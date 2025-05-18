@@ -31,6 +31,7 @@ export class HomePage {
     this.webSocket.connectWebSocket(idUser);
   }
   public signOut(): void {
+    this.webSocket.closeSesion();
     localStorage.removeItem('token');
     this.router.navigateByUrl('/login');
   }

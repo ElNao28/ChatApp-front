@@ -7,6 +7,8 @@ import {
   ChatUser,
   Message,
   SendMessage,
+  Status,
+  User,
 } from 'src/app/interfaces/messages.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
@@ -19,7 +21,7 @@ import { WebSocketService } from 'src/app/services/web-socket.service';
   styleUrls: ['./chat.page.css'],
   standalone: false,
 })
-export class ChatPage {
+export class ChatPage implements AfterViewInit {
   constructor(
     private activateRouter: ActivatedRoute,
     private chatService: ChatService,
@@ -29,18 +31,55 @@ export class ChatPage {
     private fb: FormBuilder
   ) {}
 
+  public titleChat: string = '';
+  public status: string = '';
   public messages: Message[] = [];
   private foundChat: boolean = false;
   private idChat: string | undefined = undefined;
-  public titleChat: string = '';
+  public client: User = {
+    id: '',
+    username: '',
+    password: '',
+    lastConection: '',
+    status: Status.Offline,
+  };
   public sendMessageForm: FormGroup = this.fb.group({
     message: ['', [Validators.required]],
   });
 
   ionViewWillEnter(): void {
     this.getChats();
+    this.getStatusClient();
   }
-
+  ngAfterViewInit(): void {
+    this.scrollBottom();
+  }
+  public getStatusClient() {
+    const to = this.activateRouter.snapshot.paramMap.get('id')!;
+    const sendData = {
+      userId: to,
+    };
+    this.webSocket.checkStatusUser(sendData);
+    this.webSocket.getStatusUser().subscribe({
+      next: (user) => {
+        this.client = user;
+        this.titleChat = user.username;
+        if (user.status === 'online') {
+          console.log('El usuario está conectado');
+          this.status = 'En linea';
+        } else {
+          if (user.lastConection) {
+            const date = new Date(user.lastConection)
+              .toISOString()
+              .split('T')[0];
+            const time = this.getTime(user.lastConection);
+            this.status = `Ult. vez a las ${time}`;
+          }
+        }
+      },
+      error: (error) => console.error(error),
+    });
+  }
   private getChats(): void {
     const from = this.authService.decodeToken().id;
     const to = this.activateRouter.snapshot.paramMap.get('id')!;
@@ -95,7 +134,8 @@ export class ChatPage {
     this.webSocket.getMessageByChatId().subscribe({
       next: (message: Message) => {
         this.messages.push(message);
-        console.log('Evento nuevo mensaje')
+        this.scrollBottom();
+        console.log('Evento nuevo mensaje');
       },
       error: (err) => console.error(err),
     });
@@ -113,5 +153,14 @@ export class ChatPage {
     } else {
       return 'bg-white text-black';
     }
+  }
+  private scrollBottom(): void {
+    setTimeout(() => {
+      const scrollContainer = document.getElementById('chat');
+      scrollContainer?.scrollTo({
+        behavior: 'smooth',
+        top: scrollContainer.scrollHeight,
+      });
+    }, 100);
   }
 }

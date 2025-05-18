@@ -3,13 +3,18 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-text></ion-text>
+    <div clka>
+      <ul>
+        <li class="text-[1rem]" >{{ titleChat }}</li>
+        <li class="text-[0.6rem]" >{{ status }}</li>
+      </ul>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="h-full">
-    <ul class="chat-container px-3 py-3 flex flex-col gap-5 chats">
+    <ul id="chat" class="chat-container px-3 py-3 flex flex-col gap-5 chats">
       <li *ngFor="let message of messages">
         <div class="flex" [ngClass]="{'justify-end': isMyMessage(message)}">
           <div class="px-2 pt-2 rounded-md {{ngClassByMessage(message)}}">
