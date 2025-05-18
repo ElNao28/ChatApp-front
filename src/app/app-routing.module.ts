@@ -36,6 +36,7 @@ const routes: Routes = [
       import('./pages/list-contacts/list-contacts.module').then(
         (m) => m.ListContactsPageModule
       ),
+    canActivate: [foundTokenGuard],
   },
   {
     path: '',

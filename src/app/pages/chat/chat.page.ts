@@ -49,37 +49,37 @@ export class ChatPage implements AfterViewInit {
 
   ionViewWillEnter(): void {
     this.getChats();
-    this.getStatusClient();
+    // this.getStatusClient();
   }
   ngAfterViewInit(): void {
     this.scrollBottom();
   }
-  public getStatusClient() {
-    const to = this.activateRouter.snapshot.paramMap.get('id')!;
-    const sendData = {
-      userId: to,
-    };
-    this.webSocket.checkStatusUser(sendData);
-    this.webSocket.getStatusUser().subscribe({
-      next: (user) => {
-        this.client = user;
-        this.titleChat = user.username;
-        if (user.status === 'online') {
-          console.log('El usuario está conectado');
-          this.status = 'En linea';
-        } else {
-          if (user.lastConection) {
-            const date = new Date(user.lastConection)
-              .toISOString()
-              .split('T')[0];
-            const time = this.getTime(user.lastConection);
-            this.status = `Ult. vez a las ${time}`;
-          }
-        }
-      },
-      error: (error) => console.error(error),
-    });
-  }
+  // public getStatusClient() {
+  //   const to = this.activateRouter.snapshot.paramMap.get('id')!;
+  //   const sendData = {
+  //     userId: to,
+  //   };
+  //   this.webSocket.checkStatusUser(sendData);
+  //   this.webSocket.getStatusUser().subscribe({
+  //     next: (user) => {
+  //       this.client = user;
+  //       this.titleChat = user.username;
+  //       if (user.status === 'online') {
+  //         console.log('El usuario está conectado');
+  //         this.status = 'En linea';
+  //       } else {
+  //         if (user.lastConection) {
+  //           const date = new Date(user.lastConection)
+  //             .toISOString()
+  //             .split('T')[0];
+  //           const time = this.getTime(user.lastConection);
+  //           this.status = `Ult. vez a las ${time}`;
+  //         }
+  //       }
+  //     },
+  //     error: (error) => console.error(error),
+  //   });
+  // }
   private getChats(): void {
     const from = this.authService.decodeToken().id;
     const to = this.activateRouter.snapshot.paramMap.get('id')!;

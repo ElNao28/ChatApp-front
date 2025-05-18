@@ -23,12 +23,11 @@ export class HomePage {
 
   ionViewWillEnter(): void {
     this.connectedApp();
-    this.getListChats();
   }
-
   public connectedApp(): void {
     const idUser = this.authService.decodeToken().id;
     this.webSocket.connectWebSocket(idUser);
+    this.getListChats();
   }
   public signOut(): void {
     this.webSocket.closeSesion();
@@ -36,10 +35,12 @@ export class HomePage {
     this.router.navigateByUrl('/login');
   }
   public getListChats(): void {
+    console.log('Obteniendo lista de chats');
     this.webSocket.getListChats().subscribe({
       next: (chats) => {
+        console.log(chats);
         this.listChat = chats;
-        console.log('Evento para mostrar chats');
+        console.log(this.listChat);
       },
       error: (error) => console.error(error),
     });

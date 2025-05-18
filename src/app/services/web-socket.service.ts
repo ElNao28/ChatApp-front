@@ -21,12 +21,12 @@ export class WebSocketService {
     this.socket.emit('joinRoom', { chatId });
   }
 
-  public checkStatusUser(data: { userId: string }) {
-    this.socket.emit('checkStatusUser', data);
-  }
-  public getStatusUser(): Observable<User> {
-    return this.socket.fromEvent('statusUser');
-  }
+  // public checkStatusUser(data: { userId: string }) {
+  //   this.socket.emit('checkStatusUser', data);
+  // }
+  // public getStatusUser(): Observable<User> {
+  //   return this.socket.fromEvent('statusUser');
+  // }
 
   public sendMessage(data: SendMessage): void {
     this.socket.emit('sendMessage', data);
