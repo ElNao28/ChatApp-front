@@ -22,7 +22,7 @@
         *ngFor="let chat of listChat"
         color="'medium'"
         class="mt-3"
-        [routerLink]="'/chat/'+ chat.id"
+        [routerLink]="'/chat/'+ chat.chat.user.id"
       >
         <ul class="w-full">
           <li class="font-bold">{{chat.chat.user.username| titlecase}}</li>

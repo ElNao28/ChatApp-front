@@ -38,6 +38,7 @@ export class HomePage {
     this.webSocket.getListChats().subscribe({
       next: (chats) => {
         this.listChat = chats;
+        console.log(this.listChat);
       },
       error: (error) => console.error(error),
     });
