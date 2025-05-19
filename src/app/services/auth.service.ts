@@ -6,7 +6,7 @@ import {
   NewUser,
   UserDecoded,
 } from '../interfaces/user.interface';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { HandlerResponse } from '../utils/Handler-response.util';
 import { Observable } from 'rxjs';
 import { ResponseLogin } from '../interfaces/login.interface';

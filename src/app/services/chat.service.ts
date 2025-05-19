@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { HandlerResponse } from '../utils/Handler-response.util';
 import { ChatUser } from '../interfaces/messages.interface';
 import { Observable } from 'rxjs';

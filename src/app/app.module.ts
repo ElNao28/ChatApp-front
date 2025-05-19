@@ -10,7 +10,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { WebSocketService } from './services/web-socket.service';
 import { ngrokInterceptor } from './interceptors/ngrok.interceptor';
 import Aura from '@primeng/themes/aura';
@@ -40,10 +40,10 @@ const config: SocketIoConfig = {
     WebSocketService,
     provideAnimationsAsync(),
     providePrimeNG({
-            theme: {
-                preset: Aura
-            }
-        })
+      theme: {
+        preset: Aura,
+      },
+    }),
   ],
   bootstrap: [AppComponent],
 })
