@@ -1,5 +1,5 @@
 .chat-container {
-  background-color: #636469;
+  background-color: black;
   position: relative;
   overflow-y: auto;
 }
@@ -17,6 +17,6 @@ input{
   height: 90%;
 }
 form{
-  background-color: #636469;
+  background-color: black;
   height: 10%;
 }

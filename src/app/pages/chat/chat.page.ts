@@ -31,8 +31,8 @@ export class ChatPage implements AfterViewInit {
     private fb: FormBuilder
   ) {}
 
-  public titleChat: string = '';
-  public status: string = '';
+  public titleChat: string = 'Juanito';
+  public status: string = 'En linea';
   public messages: Message[] = [];
   private foundChat: boolean = false;
   private idChat: string | undefined = undefined;
@@ -149,9 +149,9 @@ export class ChatPage implements AfterViewInit {
   }
   public ngClassByMessage(message: Message): string {
     if (!this.isMyMessage(message)) {
-      return 'bg-gray-700 text-white';
+      return 'bg-gray-600 text-white';
     } else {
-      return 'bg-white text-black';
+      return 'bg-blue-500 text-white';
     }
   }
   private scrollBottom(): void {

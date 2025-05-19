@@ -1,12 +1,21 @@
 <ion-header>
   <ion-toolbar [color]="'dark'">
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" class="p-0 m-0">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <div clka>
-      <ul>
-        <li class="text-[1rem]" >{{ titleChat }}</li>
-        <li class="text-[0.6rem]" >{{ status }}</li>
+    <div>
+      <ul class="flex items-center gap-1">
+        <li>
+          <img
+            src="../../../assets/icon/user-icon.png"
+            alt="user"
+            class="w-[2.5rem]"
+          />
+        </li>
+        <div>
+          <li class="text-[1rem]">{{ titleChat }}</li>
+          <li class="text-[0.6rem]">{{ status }}</li>
+        </div>
       </ul>
     </div>
   </ion-toolbar>
@@ -17,13 +26,14 @@
     <ul id="chat" class="chat-container px-3 py-3 flex flex-col gap-5 chats">
       <li *ngFor="let message of messages">
         <div class="flex" [ngClass]="{'justify-end': isMyMessage(message)}">
-          <div class="px-2 pt-2 rounded-md {{ngClassByMessage(message)}}">
+          <div class="px-2 pt-1 rounded-md {{ngClassByMessage(message)}}">
             <ul class="text-sm text-chat">
               <li>{{message.message}}</li>
-              <div class="flex justify-end">
-                <li class="time text-gray-400">
+              <div class="flex items-center gap-1 justify-end">
+                <li class="time text-gray-200">
                   {{getTime(message.createdAt)}}
                 </li>
+                <ion-icon name="checkmark-done-outline"></ion-icon>
               </div>
             </ul>
           </div>
@@ -43,7 +53,7 @@
           formControlName="message"
         />
         <button class="" type="submit" class="flex items-center">
-          <ion-icon name="send" class="text-xl" color="success"></ion-icon>
+          <ion-icon name="send" class="text-xl" color="primary"></ion-icon>
         </button>
       </div>
     </form>

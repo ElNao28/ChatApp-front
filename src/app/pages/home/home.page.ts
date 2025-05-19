@@ -19,7 +19,8 @@ export class HomePage {
     private genericsService: GenericsService
   ) {}
 
-  public listChat: Home[] = [];
+  private listChat: Home[] = [];
+  public filterChatsBk: Home[] = [];
 
   ionViewWillEnter(): void {
     this.connectedApp();
@@ -40,12 +41,21 @@ export class HomePage {
       next: (chats) => {
         console.log(chats);
         this.listChat = chats;
-        console.log(this.listChat);
+        this.filterChatsBk = [...this.listChat];
       },
       error: (error) => console.error(error),
     });
   }
   public getTime(createdAt: string): string {
     return this.genericsService.getTime(createdAt);
+  }
+  public filterChats(event: string) {
+    if (!event) {
+      this.filterChatsBk = [...this.listChat];
+      return;
+    }
+    this.filterChatsBk = this.listChat.filter((chat) =>
+      chat.chat.user.username.toLowerCase().includes(event.toLowerCase())
+    );
   }
 }
