@@ -20,7 +20,7 @@ import { WebSocketService } from 'src/app/services/web-socket.service';
   styleUrls: ['./chat.page.css'],
   standalone: false,
 })
-export class ChatPage implements AfterViewInit {
+export class ChatPage {
   constructor(
     private activateRouter: ActivatedRoute,
     private chatService: ChatService,
@@ -51,10 +51,8 @@ export class ChatPage implements AfterViewInit {
   ionViewWillEnter(): void {
     this.getChats();
     this.getWritingStatusClient();
-    // this.getStatusClient();
-  }
-  ngAfterViewInit(): void {
     this.scrollBottom();
+    // this.getStatusClient();
   }
   // public getStatusClient() {
   //   const to = this.activateRouter.snapshot.paramMap.get('id')!;
