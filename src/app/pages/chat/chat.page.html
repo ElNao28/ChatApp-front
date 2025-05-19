@@ -39,6 +39,15 @@
           </div>
         </div>
       </li>
+      <li *ngIf="isWritingClient">
+        <div class="px-2 py-2 rounded-md bg-gray-600 text-white w-1/6">
+          <div class="flex items-center justify-center gap-1 typing-indicator">
+            <span class="bg-gray-400 rounded-full p-1"></span>
+            <span class="bg-gray-400 rounded-full p-1"></span>
+            <span class="bg-gray-400 rounded-full p-1"></span>
+          </div>
+        </div>
+      </li>
     </ul>
     <form
       class="fixed bottom-0 w-full px-3 flex items-end pb-5 gap-1 z-10"
@@ -51,6 +60,7 @@
           placeholder="Mensaje"
           class="bg-gray-300 bg-opacity-30 rounded-md px-2 py-3 w-full"
           formControlName="message"
+          (keypress)="imWritingEvent()"
         />
         <button class="" type="submit" class="flex items-center">
           <ion-icon name="send" class="text-xl" color="primary"></ion-icon>

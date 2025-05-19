@@ -35,6 +35,21 @@ export class WebSocketService {
   public getMessageByChatId(): Observable<Message> {
     return this.socket.fromEvent('newMessage');
   }
+
+  public isWriting(data: {
+    userId: string;
+    chatId: string;
+    isWriting: boolean;
+  }) {
+    this.socket.emit('isWriting', data);
+  }
+  public getWritingStatus(): Observable<{
+    userId: string;
+    isWriting: boolean;
+  }> {
+    return this.socket.fromEvent('writingStatus');
+  }
+
   public closeSesion(): void {
     this.socket.disconnect();
   }

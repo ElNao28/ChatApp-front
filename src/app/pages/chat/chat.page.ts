@@ -1,8 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { map, tap } from 'rxjs';
+import { debounce, fromEvent, map, timer } from 'rxjs';
 import {
   ChatUser,
   Message,
@@ -36,6 +35,8 @@ export class ChatPage implements AfterViewInit {
   public messages: Message[] = [];
   private foundChat: boolean = false;
   private idChat: string | undefined = undefined;
+  public imWriting: boolean = false;
+  public isWritingClient: boolean = false;
   public client: User = {
     id: '',
     username: '',
@@ -49,6 +50,7 @@ export class ChatPage implements AfterViewInit {
 
   ionViewWillEnter(): void {
     this.getChats();
+    this.getWritingStatusClient();
     // this.getStatusClient();
   }
   ngAfterViewInit(): void {
@@ -140,7 +142,34 @@ export class ChatPage implements AfterViewInit {
       error: (err) => console.error(err),
     });
   }
-
+  public isWritingEvent(status: boolean): void {
+    if (this.imWriting) return;
+    this.webSocket.isWriting({
+      userId: this.authService.decodeToken().id,
+      chatId: this.idChat!,
+      isWriting: status,
+    });
+  }
+  public imWritingEvent() {
+    this.isWritingEvent(true);
+    this.imWriting = true;
+    fromEvent(document, 'keyup')
+      .pipe(debounce(() => timer(500)))
+      .subscribe((event) => {
+        this.imWriting = false;
+        this.isWritingEvent(false);
+      });
+  }
+  public getWritingStatusClient(): void {
+    this.webSocket.getWritingStatus().subscribe({
+      next: ({ isWriting, userId }) => {
+        if (userId !== this.authService.decodeToken().id) {
+          this.isWritingClient = isWriting;
+        }
+      },
+      error: (err) => console.error(err),
+    });
+  }
   public getTime(createdAt: string): string {
     return this.genericsService.getTime(createdAt);
   }
