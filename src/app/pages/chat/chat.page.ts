@@ -154,7 +154,7 @@ export class ChatPage implements AfterViewInit {
     this.isWritingEvent(true);
     this.imWriting = true;
     fromEvent(document, 'keyup')
-      .pipe(debounce(() => timer(500)))
+      .pipe(debounce(() => timer(1000)))
       .subscribe((event) => {
         this.imWriting = false;
         this.isWritingEvent(false);
